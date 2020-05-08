@@ -1,5 +1,9 @@
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferInt;
@@ -18,20 +22,25 @@ public class Graphics extends Canvas implements Runnable {
     private JFrame frame;
     private BufferedImage image;
     private int[] pixels;
+    private int scale;
 
     private Thread thread;
     private boolean running = false;
     private int fps = 60;
-    private int ups = 10;
+    private int ups = 60;
 
-    private Sprite s;
+    private Ball b;
+    private Paddle paddle1;
+    private Paddle paddle2;
 
-    public Graphics(int w, int h) {
+    public Graphics(int w, int h, int scale) {
         this.width = w;
         this.height = h;
-        image = new BufferedImage(w, h, BufferedImage.TYPE_INT_RGB);
+        this.scale = scale;
+        image = new BufferedImage(w, h, BufferedImage.TYPE_INT_ARGB);
+
         pixels = ((DataBufferInt) image.getRaster().getDataBuffer()).getData();
-        Dimension size = new Dimension(width, height);
+        Dimension size = new Dimension(scale*width, scale*height);
         setPreferredSize(size);
         frame = new JFrame();
         frame.setTitle(title);
@@ -41,10 +50,25 @@ public class Graphics extends Canvas implements Runnable {
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
 
-        s = new Sprite(32,32);
+        this.addKeyListener(new MyKeyListener());
+        this.addMouseListener(new MyMouseListener());
+        this.requestFocus();
+   /* paddle1 och paddle2 gör att röda rektangel  byter platsen
+
+    */
+        b = new Ball(200,100);
+        paddle1 = new Paddle(100,50,0xFFFF0000);
+        paddle2 = new Paddle(300,200,0xFF00FF00);
     }
 
     private void draw() {
+        for (int i = 0 ; i < pixels.length ; i++) {
+            pixels[i] = 0xFF000000;
+        }
+        b.draw(pixels,width);
+        paddle1.draw(pixels,width);
+        paddle2.draw(pixels,width);
+
         BufferStrategy bs = getBufferStrategy();
         if (bs == null) {
             createBufferStrategy(3);
@@ -58,18 +82,11 @@ public class Graphics extends Canvas implements Runnable {
     }
 
     private void update() {
-        for (int i = 0 ; i < pixels.length ; i++) {
-            pixels[i] = 0;
-        }
 
-        int x = (int)(Math.random()*(width-32));
-        int y = (int)(Math.random()*(height-32));
-
-        for (int i = 0 ; i < s.getHeight() ; i++) {
-            for (int j = 0 ; j < s.getWidth() ; j++) {
-                pixels[(y+i)*width + x+j] = s.getPixels()[i*s.getWidth()+j];
-            }
-        }
+        b.update(paddle1.getBoundingBox());
+        b.update(paddle2.getBoundingBox());
+        paddle1.update();
+        paddle2.update();
     }
 
     public synchronized void start() {
@@ -114,4 +131,43 @@ public class Graphics extends Canvas implements Runnable {
         stop();
     }
 
+    private class MyKeyListener implements KeyListener {
+        @Override
+        public void keyTyped(KeyEvent keyEvent) {
+
+        }
+
+        @Override
+        public void keyPressed(KeyEvent keyEvent) {
+            paddle1.keyPressed(keyEvent);
+        }
+
+        @Override
+        public void keyReleased(KeyEvent keyEvent) {
+            paddle1.keyReleased(keyEvent);
+        }
+    }
+
+    private class MyMouseListener implements MouseListener {
+        @Override
+        public void mouseClicked(MouseEvent mouseEvent) {
+        }
+
+        @Override
+        public void mousePressed(MouseEvent mouseEvent) {
+        }
+
+        @Override
+        public void mouseReleased(MouseEvent mouseEvent) {
+
+        }
+
+        @Override
+        public void mouseEntered(MouseEvent mouseEvent) {
+        }
+
+        @Override
+        public void mouseExited(MouseEvent mouseEvent) {
+        }
+    }
 }
