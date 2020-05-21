@@ -1,13 +1,14 @@
 import java.awt.*;
 import java.awt.Graphics;
 import java.awt.event.KeyEvent;
+import java.util.Random;
 
 public class Paddle {
     private int xDirection;
     private int yDirection;
     private int[] pixels;
     private Rectangle boundingBox;
-    private int width = 60;
+    private int width = 70;
     private int height = 60;
 
     public Paddle(int x, int y, int col){
@@ -49,12 +50,13 @@ public class Paddle {
 
     }
 
+
     public void setXDirection(int xdir) {
-        xDirection = xdir;
+        xDirection = 1;
     }
 
     public void setYDirection(int ydir){
-        yDirection = ydir;
+        yDirection = 0;
     }
 
     public Rectangle getBoundingBox() {
@@ -66,16 +68,22 @@ public class Paddle {
         if(boundingBox.x <= 0) {
             boundingBox.x = 0;
         }
-        if(boundingBox.x >= 380) {
-            boundingBox.x = 380;
+        if(boundingBox.x >= 450) {
+            boundingBox.x = 54;
         }
         boundingBox.y += yDirection;
-        if(boundingBox.y <= 0) {
-            boundingBox.y = 0;
+        if(boundingBox.y <= 58) {
+            boundingBox.y = 22;
         }
-        if(boundingBox.y >= 280) {
-            boundingBox.y = 280;
+        if(boundingBox.y >= 380) {
+            boundingBox.y = 550;
         }
+     /*   int rDir = 0;
+        setXDirection(0);
+        int yrDir = r.nextInt(1);
+        if(yrDir == 1) {
+            yrDir--;
+        }*/
     }
 
     public void draw(int[] Screen, int screenWidth){
@@ -85,4 +93,6 @@ public class Paddle {
             }
         }
     }
+
+
 }

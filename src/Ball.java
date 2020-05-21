@@ -6,8 +6,9 @@ public class Ball {
     private int xDirection, yDirection;
     private int[] pixels;
     private Rectangle boundingBox;
-    private int height = 15;
-    private int width = 25;
+    /* bollen size */
+    private int height = 20;
+    private int width = 20;
 
     public Ball(int x, int y){
         pixels = new int[width*height];
@@ -82,6 +83,7 @@ public class Ball {
         boundingBox.y += yDirection;
         System.out.println();
         //Bounce the ball when edge is detected
+       /*  den gör att går fort */
         if (boundingBox.x <= 0) {
             setXDirection(+1);
         }
@@ -89,7 +91,7 @@ public class Ball {
             setXDirection(-1);
         }
         if (boundingBox.y <= 0) setYDirection(+1);
-        if (boundingBox.y >= 385) setYDirection(-1);
+        if (boundingBox.y >= 280) setYDirection(-1);
     }
 
     public void update(Rectangle r) {

@@ -1,6 +1,7 @@
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyEvent;
+import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -14,7 +15,7 @@ import java.awt.image.DataBufferInt;
  *
  * @author Magnus Silverdal
  */
-public class Graphics extends Canvas implements Runnable {
+public class Graphics<ball2> extends Canvas implements Runnable {
     private String title = "Graphics";
     private int width;
     private int height;
@@ -27,11 +28,12 @@ public class Graphics extends Canvas implements Runnable {
     private Thread thread;
     private boolean running = false;
     private int fps = 60;
-    private int ups = 60;
+    private int ups = 70;
 
-    private Ball b;
+    private Ball b,ball2;
     private Paddle paddle1;
     private Paddle paddle2;
+    private Paddle paddle3;
 
     public Graphics(int w, int h, int scale) {
         this.width = w;
@@ -56,18 +58,22 @@ public class Graphics extends Canvas implements Runnable {
    /* paddle1 och paddle2 gör att röda rektangel  byter platsen
 
     */
-        b = new Ball(200,100);
-        paddle1 = new Paddle(100,50,0xFFFF0000);
-        paddle2 = new Paddle(300,200,0xFF00FF00);
+        b = new Ball(200,150);
+        ball2 = new Ball(100,50);
+        paddle1 = new Paddle(300,100,0xFFFF0000);
+        paddle2 = new Paddle(10,80,0xFF00FF0);
+        paddle3 = new Paddle(150,150,0xFF0f00);
     }
 
     private void draw() {
         for (int i = 0 ; i < pixels.length ; i++) {
             pixels[i] = 0xFF000000;
         }
-        b.draw(pixels,width);
+        b.draw(pixels, width);
+        ball2.draw(pixels, width);
         paddle1.draw(pixels,width);
         paddle2.draw(pixels,width);
+        paddle3.draw(pixels,width);
 
         BufferStrategy bs = getBufferStrategy();
         if (bs == null) {
@@ -85,8 +91,14 @@ public class Graphics extends Canvas implements Runnable {
 
         b.update(paddle1.getBoundingBox());
         b.update(paddle2.getBoundingBox());
+        b.update(paddle3.getBoundingBox());
+        ball2.update(paddle1.getBoundingBox());
+        ball2.update(paddle2.getBoundingBox());
+        ball2.update(paddle3.getBoundingBox());
         paddle1.update();
         paddle2.update();
+        paddle3.update();
+
     }
 
     public synchronized void start() {
@@ -143,9 +155,9 @@ public class Graphics extends Canvas implements Runnable {
         }
 
         @Override
-        public void keyReleased(KeyEvent keyEvent) {
-            paddle1.keyReleased(keyEvent);
+        public void keyReleased(KeyEvent keyEvent) { paddle2.keyReleased(keyEvent);
         }
+
     }
 
     private class MyMouseListener implements MouseListener {
