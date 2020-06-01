@@ -1,0 +1,28 @@
+Rapport, post-mortem
+Rapporten för det här arbetet ska vara i en post-mortem form. Fokus ligger på att identifiera dina erfarenheter av arbetet, de kan vara positiva eller negativa men du ska analysera hur du arbetar med dessa så att de kan undvikas eller upprepas. Du behöver alltså skriva mer än att X gick bra och Y gick dåligt. Rapporten ska innehålla följande delar.
+
+•	Titel
+#, Boll rund
+•	Inledning
+o	Här beskriver du kortfattat arbetets syfte/mål, arbetssätt, genomförande.
+o	Vad är det för något du ska utveckla, berätta om din inspiration och ideer.spel som man kan spela genom att 
+             #, Mitt mål är att göra ett spel som man kan spela genom att de lilla bollarna ska studsa mellan dom stora paddlarna. Man kan röra de stora pedalerna genom att trycka på pilarna. Jag ska utveckla mitt projekt genom att använda flera bollar istället en boll och hur for de ska rör sig.
+
+•	Bakgrund
+o	Här beskriver du den teknik du har använt och motiverar detta.
+o	Berätta om ditt planeringsarbete.
+o	Redovisa din planering och dess delar.
+o	Tester och feedback arbete.
+          #, Jag har googlat vissa saker som jag behöves för projekt och jag fick lite hjälp från arbetskamrat. Min plan för projekts var att hålla bollarna utan att de studsar på golvet och om den tog golvet då säger programmet game över.
+•	Positiva erfarenheter
+o	Här beskriver du vad som har gått bra i ditt projekt och analyserar varför.
+         #, jag fick lite erfanhit om hur kan man skapa en boll med olika format och hur fort ska en grej ska rör sig. 
+•	Negativa erfarenheter
+o	Här beskriver du det som du anser har gått mindre bra med ditt projekt och analyserar hur du kan undvika detta i framtida projekt.
+#, Jag kunde ej att sätta score mitt projekt hur många gånger slog jag på pedalerna
+•	Sammanfattning
+o	Här redovisar du dina slutsatser, erfarenheter och lärdomar. Reflektera över din produkt och dess/dina utvecklingsmöjligheter.
+o	Vad kan vidareutvecklas och finns det utrymme att bygga vidare på projektet.
+                         #, Jag ska vidareutveckla min score som jag vill bygga om och använda olika SHAPE i min program. 
+
+
